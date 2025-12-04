@@ -54,7 +54,7 @@ namespace LCS.Forms
             Projects = JsonConvert.DeserializeObject<List<LcsProject>>(Properties.Settings.Default.projects);
             if (Projects != null)
             {
-                _projectsSource.DataSource = Projects.OrderBy(f => f.Favorite).ThenBy(i => i.Id).Reverse();
+                _projectsSource.DataSource = Projects.OrderByDescending(f => f.Favorite).ThenBy(i => i.OrganizationName);
             }
         }
 
@@ -127,7 +127,7 @@ namespace LCS.Forms
                     .Select(newProject => { newProject.Favorite = true; return newProject; })
                         .ToList();
             }
-            _projectsSource.DataSource = Projects.OrderBy(f => f.Favorite).ThenBy(i => i.Id).Reverse();
+            _projectsSource.DataSource = OrderByDescending(f => f.Favorite).ThenBy(i => i.OrganizationName);
             _projectsSource.ResetBindings(false);
         }
 
