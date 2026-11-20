@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Net.Http;
 using System.Windows.Forms;
 
@@ -17,6 +18,9 @@ namespace LCS.Forms
         }
 
         public bool Cancelled { get; private set; }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Dictionary<string, string> Rule { get; set; }
 
         protected override CreateParams CreateParams
@@ -60,7 +64,7 @@ namespace LCS.Forms
                 }
                 catch
                 {
-                    MessageBox.Show("Failed to get your IP address. Please enter it manually.");
+                    MessageBox.Show(this, "Failed to get your IP address. Please enter it manually.");
                 }
             }
         }
@@ -69,12 +73,12 @@ namespace LCS.Forms
         {
             if (string.IsNullOrEmpty(textBox1.Text))
             {
-                MessageBox.Show("Rule name is empty.");
+                MessageBox.Show(this, "Rule name is empty.");
                 return false;
             }
             if (string.IsNullOrEmpty(textBox2.Text))
             {
-                MessageBox.Show("IP address field is empty.");
+                MessageBox.Show(this, "IP address field is empty.");
                 return false;
             }
             Rule = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)

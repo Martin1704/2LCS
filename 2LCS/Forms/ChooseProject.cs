@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
@@ -22,6 +23,8 @@ namespace LCS.Forms
         }
 
         internal bool Cancelled { get; private set; }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal HttpClientHelper HttpClientHelper { get; set; }
         internal LcsProject LcsProject { get; private set; }
 
@@ -65,7 +68,7 @@ namespace LCS.Forms
                 LcsProject = (LcsProject)projectsDataGridView.SelectedRows[0].DataBoundItem;
                 if (LcsProject.RequestPending == true)
                 {
-                    MessageBox.Show($"Invitation to the project {LcsProject.Name} has not been completed yet for your user account.\n\nVisit LCS and accept invitation first!", "Warning! Action needed.");
+                    MessageBox.Show(this, $"Invitation to the project {LcsProject.Name} has not been completed yet for your user account.\n\nVisit LCS and accept invitation first!", "Warning! Action needed.");
                     return;
                 }
                 UpdateProjectLinks();
@@ -84,7 +87,7 @@ namespace LCS.Forms
                 LcsProject = (LcsProject)projectsDataGridView.SelectedRows[0].DataBoundItem;
                 if (LcsProject.RequestPending == true)
                 {
-                    MessageBox.Show($"Invitation to the project {LcsProject.Name} has not been completed yet for your user account.\n\nVisit LCS and accept invitation first!", "Warning! Action needed.");
+                    MessageBox.Show(this, $"Invitation to the project {LcsProject.Name} has not been completed yet for your user account.\n\nVisit LCS and accept invitation first!", "Warning! Action needed.");
                     return;
                 }
                 UpdateProjectLinks();
